@@ -23,7 +23,7 @@ repositories {
 	maven { url = uri("https://repo.spring.io/milestone") }
 }
 
-extra["snippetsDir"] = file("build/generated-snippets")
+val snippetsDir by extra { file("build/generated-snippets") }
 extra["springCloudVersion"] = "2020.0.0"
 extra["testcontainersVersion"] = "1.15.0"
 
@@ -65,13 +65,11 @@ tasks {
 		useJUnitPlatform()
 	}
 
-    val snippetsDir = extra["snippetsDir"]!!
-	val testTask = withType<Test> {
+	withType<Test> {
 		outputs.dir(snippetsDir)
 	}
 
     withType<org.asciidoctor.gradle.AsciidoctorTask> {
-		dependsOn(testTask)
 		inputs.dir(snippetsDir)
 		dependsOn(test)
 	}
