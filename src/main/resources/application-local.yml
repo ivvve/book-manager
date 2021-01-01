@@ -1,0 +1,9 @@
+spring:
+  # Liquibase
+  liquibase:
+    enabled: false
+
+  # Vault
+  cloud:
+    vault:
+      enabled: false
