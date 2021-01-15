@@ -8,5 +8,7 @@ interface AccountRepository {
 
     fun findById(id: UUID): Account?
 
+    fun findByEmail(email: String): Account?
+
     fun deleteAll()
 }
