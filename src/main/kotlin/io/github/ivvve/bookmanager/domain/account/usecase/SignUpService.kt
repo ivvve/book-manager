@@ -2,7 +2,7 @@ package io.github.ivvve.bookmanager.domain.account.usecase
 
 import io.github.ivvve.bookmanager.domain.account.domain.account.AccountRepository
 import io.github.ivvve.bookmanager.domain.account.domain.account.DuplicatedAccountChecker
-import io.github.ivvve.bookmanager.domain.account.domain.account.EmailValidator
+import io.github.ivvve.bookmanager.domain.account.domain.account.EmailDomainValidator
 import io.github.ivvve.bookmanager.domain.account.domain.account.PasswordEncryptor
 import io.github.ivvve.bookmanager.domain.account.domain.account.entities.Account
 import io.github.ivvve.bookmanager.domain.account.domain.verification.VerificationCodeGenerator
@@ -15,7 +15,7 @@ import java.util.*
 
 @Service
 class SignUpService(
-    private val emailValidator: EmailValidator,
+    private val emailDomainValidator: EmailDomainValidator,
     private val verificationCodeGenerator: VerificationCodeGenerator,
     private val verificationCodeStore: VerificationCodeStore,
     private val verificationCodeValidator: VerificationCodeValidator,
@@ -26,7 +26,7 @@ class SignUpService(
     private val accountRepository: AccountRepository
 ) {
     fun sendEmailVerificationCode(email: String): VerificationCode {
-        this.emailValidator.validate(email)
+        this.emailDomainValidator.validate(email)
 
         val verificationCode = this.verificationCodeGenerator.generate(email)
         this.verificationCodeStore.save(verificationCode)
