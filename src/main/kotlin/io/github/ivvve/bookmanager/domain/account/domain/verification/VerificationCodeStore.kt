@@ -6,4 +6,6 @@ interface VerificationCodeStore {
     fun save(code: VerificationCode): VerificationCode
 
     fun findByEmail(email: String): VerificationCode?
+
+    fun clear()
 }

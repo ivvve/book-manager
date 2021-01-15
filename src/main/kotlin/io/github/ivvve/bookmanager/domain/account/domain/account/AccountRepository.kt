@@ -7,4 +7,6 @@ interface AccountRepository {
     fun save(account: Account): Account
 
     fun findById(id: UUID): Account?
+
+    fun deleteAll()
 }
