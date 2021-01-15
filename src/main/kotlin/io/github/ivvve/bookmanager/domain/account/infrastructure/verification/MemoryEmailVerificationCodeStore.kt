@@ -17,4 +17,8 @@ class MemoryEmailVerificationCodeStore : VerificationCodeStore {
     override fun findByEmail(email: String): VerificationCode? {
         return this.store[email]
     }
+
+    override fun clear() {
+        this.store.clear()
+    }
 }

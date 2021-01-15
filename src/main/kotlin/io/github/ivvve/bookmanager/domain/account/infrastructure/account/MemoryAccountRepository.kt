@@ -18,4 +18,8 @@ class MemoryAccountRepository : AccountRepository {
     override fun findById(id: UUID): Account? {
         return this.store[id.toString()]
     }
+
+    override fun deleteAll() {
+        this.store.clear()
+    }
 }
