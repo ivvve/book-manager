@@ -5,6 +5,7 @@ import io.github.ivvve.bookmanager.domain.account.domain.account.DuplicatedAccou
 import io.github.ivvve.bookmanager.domain.account.domain.account.EmailValidator
 import io.github.ivvve.bookmanager.domain.account.domain.account.entities.Account
 import io.github.ivvve.bookmanager.domain.account.domain.verification.VerificationCodeGenerator
+import io.github.ivvve.bookmanager.domain.account.domain.verification.VerificationCodeSender
 import io.github.ivvve.bookmanager.domain.account.domain.verification.VerificationCodeStore
 import io.github.ivvve.bookmanager.domain.account.domain.verification.VerificationCodeValidator
 import io.github.ivvve.bookmanager.domain.account.domain.verification.entities.VerificationCode
@@ -17,6 +18,7 @@ class SignUpService(
     private val verificationCodeGenerator: VerificationCodeGenerator,
     private val verificationCodeStore: VerificationCodeStore,
     private val verificationCodeValidator: VerificationCodeValidator,
+    private val verificationCodeSender: VerificationCodeSender,
     private val duplicatedAccountChecker: DuplicatedAccountChecker,
     private val accountRepository: AccountRepository
 ) {
@@ -25,7 +27,8 @@ class SignUpService(
 
         val verificationCode = this.verificationCodeGenerator.generate(email)
         this.verificationCodeStore.save(verificationCode)
-        // TODO send email
+        this.verificationCodeSender.send(verificationCode)
+
         return verificationCode
     }
 
