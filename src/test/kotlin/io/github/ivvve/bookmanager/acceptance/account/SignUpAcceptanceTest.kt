@@ -27,4 +27,25 @@ class SignUpAcceptanceTest : AcceptanceTest() {
         // then
         `회원가입에 성공한다`(signUpResponse)
     }
+
+    @Test
+    fun `이메일 인증번호를 틀리면 회원가입에 실패한다`() {
+        // given
+        val email = "devson@naver.com"
+        val password = "devson1234"
+
+        // when
+        val emailVerificationResponse = `이메일 인증번호 전송 요청을 보낸다`(email)
+        // then
+        `이메일 인증번호 전송 요청에 성공한다`(emailVerificationResponse)
+
+        // 저장된 verification code를 변경
+        val verificationCode = this.verificationCodeHelper.getVerificationCode(email)
+        this.verificationCodeHelper.setVerificationCode(email, verificationCode.code + "X")
+
+        // when
+        val signUpResponse = `회원가입 요청을 보낸다`(email, password, verificationCode.code)
+        // then
+        `이메일 인증번호가 틀려 회원가입에 실패한다`(signUpResponse)
+    }
 }

@@ -38,3 +38,7 @@ fun `회원가입 요청을 보낸다`(email: String, password: String, verifica
 fun `회원가입에 성공한다`(signUpResponse: ExtractableResponse<Response>) {
     assertThat(signUpResponse.statusCode()).isEqualTo(HttpStatus.OK.value())
 }
+
+fun `이메일 인증번호가 틀려 회원가입에 실패한다`(signUpResponse: ExtractableResponse<Response>) {
+    assertThat(signUpResponse.statusCode()).isEqualTo(HttpStatus.UNAUTHORIZED.value())
+}
