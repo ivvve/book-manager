@@ -46,3 +46,7 @@ fun `회원가입에 성공한다`(signUpResponse: ExtractableResponse<Response>
 fun `이메일 인증번호가 틀려 회원가입에 실패한다`(signUpResponse: ExtractableResponse<Response>) {
     assertThat(signUpResponse.statusCode()).isEqualTo(HttpStatus.UNAUTHORIZED.value())
 }
+
+fun `이메일 중복으로 회원가입에 실패한다`(signUpResponse: ExtractableResponse<Response>) {
+    assertThat(signUpResponse.statusCode()).isEqualTo(HttpStatus.CONFLICT.value())
+}
