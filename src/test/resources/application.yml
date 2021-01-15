@@ -8,3 +8,8 @@ spring:
   cloud:
     vault:
       enabled: false
+
+# Application specific configs
+app:
+  service:
+    email-domain: devson.com
