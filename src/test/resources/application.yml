@@ -1,3 +1,4 @@
+# Spring configs
 spring:
   # Liquibase
   liquibase:
