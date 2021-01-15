@@ -1,7 +1,5 @@
 package io.github.ivvve.bookmanager.domain.account.domain.verification.exceptions
 
-import io.github.ivvve.bookmanager.common.exceptions.InvalidRequestException
+import io.github.ivvve.bookmanager.common.exceptions.UnauthorizedException
 
-class VerificationNotMatchedException : InvalidRequestException() {
-
-}
+class VerificationNotMatchedException : UnauthorizedException()
