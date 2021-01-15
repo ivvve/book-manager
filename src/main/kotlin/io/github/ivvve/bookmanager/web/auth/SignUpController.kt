@@ -16,13 +16,13 @@ class SignUpController(
 ) {
     @PostMapping("verification-code")
     fun sendVerificationCode(@RequestBody request: VerificationCodeRequest): ResponseEntity<Void> {
-//        this.signUpService.sendEmailVerificationCode(request.email)
+        this.signUpService.sendEmailVerificationCode(request.email)
         return ResponseEntity.ok().build()
     }
 
     @PostMapping("sign-up")
     fun signUp(@RequestBody request: SignUpRequest): ResponseEntity<Void> {
-//        this.signUpService.signUp(request.email, request.password, request.code)
+        this.signUpService.signUp(request.email, request.password, request.code)
         return ResponseEntity.ok().build()
     }
 }
