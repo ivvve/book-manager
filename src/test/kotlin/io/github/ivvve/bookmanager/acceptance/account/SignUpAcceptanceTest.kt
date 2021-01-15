@@ -1,22 +1,22 @@
 package io.github.ivvve.bookmanager.acceptance.account
 
 import io.github.ivvve.bookmanager.acceptance.AcceptanceTest
+import io.github.ivvve.bookmanager.acceptance.account.helper.AccountHelper
 import io.github.ivvve.bookmanager.acceptance.account.helper.VerificationCodeHelper
 import io.github.ivvve.bookmanager.acceptance.account.step.*
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.beans.factory.annotation.Value
 
 class SignUpAcceptanceTest : AcceptanceTest() {
     @Autowired
+    private lateinit var accountHelper: AccountHelper
+    @Autowired
     private lateinit var verificationCodeHelper: VerificationCodeHelper
-    @Value("\${app.service.email-domain}")
-    private lateinit var emailDomains: Array<String>
 
     @Test
     fun `회원가입을 한다`() {
         // given
-        val email = "devson@${emailDomains[0]}"
+        val email = this.accountHelper.getEmail("devson")
         val password = "devson1234"
 
         // when
@@ -34,7 +34,7 @@ class SignUpAcceptanceTest : AcceptanceTest() {
     @Test
     fun `이메일 인증번호를 틀리면 회원가입에 실패한다`() {
         // given
-        val email = "devson@${emailDomains[0]}"
+        val email = this.accountHelper.getEmail("devson")
         val password = "devson1234"
 
         // when
@@ -55,7 +55,7 @@ class SignUpAcceptanceTest : AcceptanceTest() {
     @Test
     fun `사내 도메인이 아닌 email로 이메일 인증번호 전송에 실패한다`() {
         // given
-        val email = "devson@aa${emailDomains[0]}"
+        val email = this.accountHelper.getEmail("devson") + "a"
 
         // when
         val emailVerificationResponse = `이메일 인증번호 전송 요청을 보낸다`(email)
