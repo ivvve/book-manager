@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Component
 
 @Component
-class EmailValidator(
+class EmailDomainValidator(
     @Value("\${app.service.email-domain}") private val supportedEmailDomains: Array<String>
 ) {
     private val emailDelimiters = "@"
