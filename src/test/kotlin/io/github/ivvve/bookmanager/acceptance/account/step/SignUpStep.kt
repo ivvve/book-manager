@@ -21,6 +21,10 @@ fun `이메일 인증번호 전송 요청에 성공한다`(emailVerificationResp
     assertThat(emailVerificationResponse.statusCode()).isEqualTo(HttpStatus.OK.value())
 }
 
+fun `이메일 인증번호 전송 요청에 실패한다`(emailVerificationResponse: ExtractableResponse<Response>) {
+    assertThat(emailVerificationResponse.statusCode()).isEqualTo(HttpStatus.BAD_REQUEST.value())
+}
+
 fun `회원가입 요청을 보낸다`(email: String, password: String, verificationCode: String): ExtractableResponse<Response> {
     val signUpParams = mapOf(
         Pair("email", email),
