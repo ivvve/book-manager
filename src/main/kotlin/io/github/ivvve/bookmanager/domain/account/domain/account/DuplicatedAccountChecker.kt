@@ -11,7 +11,7 @@ class DuplicatedAccountChecker(
     fun check(account: Account) {
         val account = this.accountRepository.findByEmail(account.email)
 
-        if (account == null) {
+        if (account != null) {
             throw DuplicatedEmailException()
         }
     }
