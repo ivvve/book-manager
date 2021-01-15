@@ -19,6 +19,12 @@ class MemoryAccountRepository : AccountRepository {
         return this.store[id.toString()]
     }
 
+    override fun findByEmail(email: String): Account? {
+        return this.store
+            .map { it.value }
+            .firstOrNull { it.email == email }
+    }
+
     override fun deleteAll() {
         this.store.clear()
     }
